@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
@@ -29,7 +29,6 @@ namespace System.Collections
         private ImmutableDictionary<TKey, TValue> _immutableDictionary;
         private ImmutableSortedDictionary<TKey, TValue> _immutableSortedDictionary;
         private FrozenDictionary<TKey, TValue> _frozenDictionary;
-        private FrozenDictionary<TKey, TValue> _frozenDictionaryOptimized;
 
         [Params(Utils.DefaultCollectionSize)]
         public int Size;
@@ -131,22 +130,11 @@ namespace System.Collections
             return result;
         }
 
-        [Benchmark]
-        public bool FrozenDictionary()
+        [Benchmark(Description = "FrozenDictionary")]
+        public bool FrozenDictionaryOptimized() // we kept the old name on purpose to avoid loosing historical data
         {
             bool result = default;
             FrozenDictionary<TKey, TValue> collection = _frozenDictionary;
-            TKey[] notFound = _notFound;
-            for (int i = 0; i < notFound.Length; i++)
-                result ^= collection.TryGetValue(notFound[i], out _);
-            return result;
-        }
-
-        [Benchmark]
-        public bool FrozenDictionaryOptimized()
-        {
-            bool result = default;
-            FrozenDictionary<TKey, TValue> collection = _frozenDictionaryOptimized;
             TKey[] notFound = _notFound;
             for (int i = 0; i < notFound.Length; i++)
                 result ^= collection.TryGetValue(notFound[i], out _);
