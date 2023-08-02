@@ -47,7 +47,6 @@ namespace System.Collections
             _immutableDictionary = Immutable.ImmutableDictionary.CreateRange<TKey, TValue>(_source);
             _immutableSortedDictionary = Immutable.ImmutableSortedDictionary.CreateRange<TKey, TValue>(_source);
             _frozenDictionary = _source.ToFrozenDictionary();
-            _frozenDictionaryOptimized = _source.ToFrozenDictionary();
         }
 
         [Benchmark]

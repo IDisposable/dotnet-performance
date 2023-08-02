@@ -10,7 +10,7 @@ namespace System.Collections
 {
     // We don't want to run all these benchmarks for every CI run, that is why they belong to ThirdParty category.
     // The benchmarks that we care about the most: optimized frozen dictionary benchmarks belong to Libraries category.
-    [BenchmarkCategory(Categories.ThirdParty)]
+    [BenchmarkCategory(Categories.Libraries)]
     public abstract class Perf_FrozenDictionary_String
     {
         protected string[] _array;
